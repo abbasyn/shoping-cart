@@ -9,7 +9,7 @@ const Minerals = (props) => {
       <h2 className="font-bold text-center p-4 text-2xl mt-6">Minerals</h2>
       <div className="container mx-auto flex flex-wrap  justify-around">
         {GEMS.map((gem) => (
-          <MineralsItem {...gem} />
+          <MineralsItem key={gem.id} {...gem} />
         ))}
       </div>
     </>

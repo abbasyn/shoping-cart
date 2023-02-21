@@ -7,6 +7,11 @@ const Cart = (props) => {
   return (
     <>
       <CartItem />
+      <span>
+        <button className="w-14  font-bold text-white p-1 bg-slate-400 hover:bg-slate-500 rounded mt-4 borde ml-[36%] border-[#e68a49] ">
+          Order
+        </button>
+      </span>
     </>
   );
 };

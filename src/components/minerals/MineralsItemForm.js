@@ -3,12 +3,30 @@ import React, { useRef, useState } from "react";
 import Input from "../UI/Input";
 
 const MineralsItemForm = ({ addItemToCart, ...props }) => {
-  const [inputVal, setInputVal] = useState(1);
+  const [amountIsValid, setAmountIsValid] = useState(true);
+
+  const amountInputRef = useRef();
+
+  // const [inputVal, setInputVal] = useState(1);
+  // addItemToCart(inputVal);
+  // console.log("SUBMITTOING", inputVal);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    addItemToCart(inputVal);
-    console.log("SUBMITTOING", inputVal);
+
+    const enterdAmount = amountInputRef.current.value;
+    const enteredAmountNumber = +enterdAmount;
+
+    if (
+      enterdAmount.trim().length === 0 ||
+      enteredAmountNumber < 1 ||
+      enterdAmount > 5
+    ) {
+      setAmountIsValid(false);
+      return;
+    }
+
+    addItemToCart(enteredAmountNumber);
   };
   //const addCartItem = props.onClick;
   return (
@@ -20,7 +38,9 @@ const MineralsItemForm = ({ addItemToCart, ...props }) => {
       >
         ADD TO CART
       </button>
+      {!amountIsValid && <p>Please enter a Valid Amount (1-5).</p>}
       <Input
+        ref={amountInputRef}
         label="Amount"
         input={{
           id: "amount",
@@ -29,6 +49,11 @@ const MineralsItemForm = ({ addItemToCart, ...props }) => {
           max: "5",
           step: "1",
           defaultValue: "1",
+
+          // value: inputVal,
+          // onChange: (e) => {
+          //   setInputVal(e.target.value);
+          // },
         }}
       />
     </form>

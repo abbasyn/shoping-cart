@@ -1,20 +1,29 @@
 import React, { useContext } from "react";
 
 import CartContext from "../context/cart-context";
-
 import MineralsItemForm from "./MineralsItemForm";
 
 const MineralsItem = (props) => {
+  const price = `$${props.price.toFixed(2)}`;
   const cartCtx = useContext(CartContext);
 
   const addItemToCart = (amount) => {
     cartCtx.addItem({
-      ...props,
-      amount,
+      id: props.id,
+      name: props.name,
+      amount: amount,
+      price: props.price,
     });
-
-    console.log("CALLING", amount, props);
   };
+
+  // const addItemToCart = (amount) => {
+  //   cartCtx.addItem({
+  //     ...props,
+  //     amount,
+  //   });
+  //   console.log("CALLING", amount, props);
+  // };
+
   return (
     <div className=" max-w-[250px] max-h-[500px] mb-4 h-[390px] bg-white border p-2 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="">

@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import CartContext from "../context/cart-context";
 import CartIcon from "../cart/CartIcon";
 
 const HeaderCartButton = ({ onClick }) => {
+  const CartCtx = useContext(CartContext);
+
+  const NumberOfCartItems = CartCtx.items.reduce((curNumber, item) => {
+    return curNumber + item.amount;
+  }, 0);
+
   return (
     <>
       <button
@@ -14,7 +21,7 @@ const HeaderCartButton = ({ onClick }) => {
         </span>
         <span className="font-bold text-white">Your Cart</span>
         <span className="bg-red-50 rounded-full px-4 py-2 font-bold text-[#e68a49]">
-          5
+          {NumberOfCartItems}
         </span>
       </button>
     </>
